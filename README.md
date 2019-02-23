@@ -1,0 +1,1 @@
+# React Native Swift Library Template Test App
