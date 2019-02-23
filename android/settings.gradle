@@ -1,0 +1,5 @@
+rootProject.name = 'ReactNativeSwiftLibraryTemplateTestApp'
+include ':@johndhammcodes_react-native-swift-library-template'
+project(':@johndhammcodes_react-native-swift-library-template').projectDir = new File(rootProject.projectDir, '../node_modules/@johndhammcodes/react-native-swift-library-template/android')
+
+include ':app'
