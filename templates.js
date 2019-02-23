@@ -21,7 +21,7 @@ export default class Templates extends React.Component {
       this.setState({callbackMsg: res});
     })
     this.setState({constant: RNSwiftLibraryTemplate.constant})
-    RNSwiftLibraryTemplate.promiseMethod()
+    RNSwiftLibraryTemplate.promiseMethod(true)
       .then(res => {
         console.log("promise response: ", res);
         this.setState({promiseResponse: res})
