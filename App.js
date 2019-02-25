@@ -8,7 +8,7 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 
 import Templates from './templates';
 
@@ -17,7 +17,9 @@ export default class App extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>React Native Swift Library Template Test</Text>
+        <View style={styles.titleBox}>
+          <Text style={styles.welcome}>React Native Swift Library Template Test</Text>
+        </View>
         <Templates/>
       </View>
     );
@@ -31,14 +33,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
+  titleBox: {
+    backgroundColor: "#BADA55",
+    padding: 10,
+    marginVertical: 20,
+  },
   welcome: {
     fontSize: 20,
+    color: "#FFF",
     textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
   },
 });

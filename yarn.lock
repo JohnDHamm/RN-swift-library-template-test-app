@@ -647,10 +647,10 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@johndhammcodes/react-native-swift-library-template@^1.0.6":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@johndhammcodes/react-native-swift-library-template/-/react-native-swift-library-template-1.0.6.tgz#ba590ad8ffec48dd8a138c80043a2c182f0ba29f"
-  integrity sha512-xeXAdgC3h8ibmwPHL9cUJl62Vf1blHe4YwWea0XiZY2EdSJvGNg4iBEnZ0vdCNLI7ao7/8PO8lTI7HtyQ6I+hA==
+"@johndhammcodes/react-native-swift-library-template@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@johndhammcodes/react-native-swift-library-template/-/react-native-swift-library-template-1.1.2.tgz#a042f3ec026dbca6557ec737b29ad2674db3c735"
+  integrity sha512-P7/HQ068vrBxRYwKUU+B4NfXQKrXasyMi4gkqN70BeJ8gdFkEpRUeyhOYBDA12TZNMca518LoaDYDzpAV4P3zw==
 
 abab@^2.0.0:
   version "2.0.0"
