@@ -1,7 +1,10 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, Button, NativeEventEmitter} from 'react-native';
 
 const { RNSwiftLibraryTemplate } = require('@johndhammcodes/react-native-swift-library-template');
+
+const RNSwiftEvents = new NativeEventEmitter(RNSwiftLibraryTemplate)
+
 
 export default class Templates extends React.Component {
 
@@ -10,12 +13,20 @@ export default class Templates extends React.Component {
     this.state = {
       callbackMsg: "",
       promiseResponse: "",
-      constant: ""
+      constant: "",
+      eventMessage: "waiting for event message..."
     }
   }
 
   componentDidMount() {
     console.log("test", RNSwiftLibraryTemplate)
+    // RNSwiftEvents.addListener(
+    //   "eventEmitter",
+    //   res => {
+    //     console.log("event:", res);
+    //   }
+    // )
+
     RNSwiftLibraryTemplate.callbackMethod(res => {
       console.log("callback response: ", res);
       this.setState({callbackMsg: res});
@@ -32,6 +43,11 @@ export default class Templates extends React.Component {
       })
   }
 
+  onPress() {
+    console.log("event button pressed!");
+    RNSwiftLibraryTemplate.eventEmitterMethod();
+  }
+
   render() {
     return (
       <View>
@@ -39,6 +55,11 @@ export default class Templates extends React.Component {
         <Text>callback: {this.state.callbackMsg}</Text>
         <Text>constant: {this.state.constant}</Text>
         <Text>promise response: {this.state.promiseResponse}</Text>
+        <Button
+          title={"press for event"}
+          onPress={() => this.onPress()}
+          />
+        <Text>{this.state.eventMessage}</Text>
       </View>
     )
   }
