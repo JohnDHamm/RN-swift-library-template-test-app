@@ -1,9 +1,10 @@
 import React from 'react';
-import {View, Text, Button, NativeEventEmitter} from 'react-native';
+import {View, Text, Button, NativeEventEmitter, StyleSheet} from 'react-native';
 
 const { RNSwiftLibraryTemplate } = require('@johndhammcodes/react-native-swift-library-template');
 
 const RNSwiftEvents = new NativeEventEmitter(RNSwiftLibraryTemplate)
+let RNSwiftEventsSubscription;
 
 
 export default class Templates extends React.Component {
@@ -19,13 +20,14 @@ export default class Templates extends React.Component {
   }
 
   componentDidMount() {
-    console.log("test", RNSwiftLibraryTemplate)
-    // RNSwiftEvents.addListener(
-    //   "eventEmitter",
-    //   res => {
-    //     console.log("event:", res);
-    //   }
-    // )
+    console.log("RNSwiftLibraryTemplate", RNSwiftLibraryTemplate)
+    RNSwiftEventsSubscription = RNSwiftEvents.addListener(
+      "eventEmitter",
+      res => {
+        console.log("event emitted:", res);
+        this.setState({eventMessage: res.message});
+      }
+    )
 
     RNSwiftLibraryTemplate.callbackMethod(res => {
       console.log("callback response: ", res);
@@ -43,6 +45,10 @@ export default class Templates extends React.Component {
       })
   }
 
+  componentWillUnmount() {
+    RNSwiftEventsSubscription.remove();
+  }
+
   onPress() {
     console.log("event button pressed!");
     RNSwiftLibraryTemplate.eventEmitterMethod();
@@ -51,16 +57,43 @@ export default class Templates extends React.Component {
   render() {
     return (
       <View>
-        <Text>templates:</Text>
-        <Text>callback: {this.state.callbackMsg}</Text>
-        <Text>constant: {this.state.constant}</Text>
-        <Text>promise response: {this.state.promiseResponse}</Text>
+        <Text style={styles.subtitle}>templates:</Text>
+        <View style={styles.textBlock}>
+          <Text style={styles.methodType}>callback: </Text>
+          <Text>{this.state.callbackMsg}</Text>
+        </View>
+        <View style={styles.textBlock}>
+          <Text style={styles.methodType}>constant: </Text>
+          <Text>{this.state.constant}</Text>
+        </View>
+        <View style={styles.textBlock}>
+          <Text style={styles.methodType}>promise response: </Text>
+          <Text>{this.state.promiseResponse}</Text>
+        </View>
         <Button
-          title={"press for event"}
+          title={"press to trigger event"}
           onPress={() => this.onPress()}
           />
-        <Text>{this.state.eventMessage}</Text>
+        <View style={styles.textBlock}>
+          <Text style={styles.methodType}>event emitted: </Text>
+          <Text>{this.state.eventMessage}</Text>
+        </View>
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  subtitle: {
+    color: "#BADA55",
+    fontStyle: "italic",
+  },
+  textBlock: {
+    flexDirection: "row",
+    marginVertical: 10,
+  },
+  methodType: {
+    color: "#AAA",
+    fontStyle: "italic",
+  }
+})
